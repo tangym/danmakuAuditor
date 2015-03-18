@@ -125,6 +125,8 @@ class ExamWidget(QWidget):
         self.layout().addWidget(self.connect_button)
         self.layout().addWidget(self.danmaku_widget)
 
+        self.setWindowTitle('弹幕审核')
+
 
     @QtCore.pyqtSlot()
     def connect_channel(self):
