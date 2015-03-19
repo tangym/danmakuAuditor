@@ -10,7 +10,7 @@ from PyQt4 import QtCore
 import uuid
 import logging
 import json
-from channel import Channel
+from channel import ExamChannel
 import shorten_id as sid
 import config
 
@@ -95,13 +95,13 @@ class ExamWidget(QWidget):
     _danmaku_delete = QtCore.pyqtSignal(int, name='_danmaku_delete')
 
     def __init__(self):
-        QMainWindow.__init__(self)
+        QWidget.__init__(self)
 
         self.channel_widget = InputWidget(label='频道', line_edit='demo')
         self.pub_passwd_widget = InputWidget(label='发布密码', line_edit='')
         self.pub_passwd_widget.line_edit.setEchoMode(QLineEdit.Password)
-        self.sub_passwd_widget = InputWidget(label='播放密码', line_edit='')
-        self.sub_passwd_widget.line_edit.setEchoMode(QLineEdit.Password)
+        self.exam_passwd_widget = InputWidget(label='审核密码', line_edit='')
+        self.exam_passwd_widget.line_edit.setEchoMode(QLineEdit.Password)
         self.uuid_widget = InputWidget(label='uuid',
                 line_edit=sid.shorten(uuid.uuid1().bytes))
         self.uuid_widget.button = QPushButton('生成')
@@ -120,7 +120,7 @@ class ExamWidget(QWidget):
         self.setLayout(QBoxLayout(QBoxLayout.TopToBottom))
         self.layout().addWidget(self.channel_widget)
         self.layout().addWidget(self.pub_passwd_widget)
-        self.layout().addWidget(self.sub_passwd_widget)
+        self.layout().addWidget(self.exam_passwd_widget)
         self.layout().addWidget(self.uuid_widget)
         self.layout().addWidget(self.connect_button)
         self.layout().addWidget(self.danmaku_widget)
@@ -132,10 +132,11 @@ class ExamWidget(QWidget):
     def connect_channel(self):
         channel_name = self.channel_widget.line_edit.text().strip()
         pub_passwd = self.pub_passwd_widget.line_edit.text().strip()
-        sub_passwd = self.sub_passwd_widget.line_edit.text().strip()
+        exam_passwd = self.exam_passwd_widget.line_edit.text().strip()
         uid = self.uuid_widget.line_edit.text().strip()
 
-        self._channel = Channel(channel_name, uid, sub_passwd, pub_passwd)
+        self._channel = ExamChannel(channel_name, uid, exam_passwd,
+                                    pub_passwd=pub_passwd)
         thread = Thread(target=self.get_danmakus, daemon=True)
         thread.start()
 
