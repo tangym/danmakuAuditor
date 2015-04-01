@@ -220,9 +220,11 @@ class DanmakuExamWidget(QWidget):
                 self.setParent(None)
             elif button == QMessageBox.No:
                 event.ignore()
+                return
             else:
                 # TODO: Throw exception
                 self.ignore()
+                return
         else:
             pass
         self.channel_widget.setGeometry(self.x(), self.y(),

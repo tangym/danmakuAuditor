@@ -31,7 +31,7 @@ class Channel:
     def get_danmaku(self):
         res = requests.get(self.url_get, headers=self._get_headers)
         try:
-            print(res.text)
+            #print(res.text)
             return json.loads(res.text)
         except ValueError as e:
             return {}
