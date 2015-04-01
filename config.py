@@ -22,12 +22,17 @@ HOTKEY = {
 
 EXAM_BUTTON_MAX_SIZE = {
     'height' : 25,
-    'width' : 25
+    'width' : 25,
 }
 
 DANMAKU_MAX_SIZE = {
-    'height': 100000,
-    'width': 100000  # 400
+    'height': 200,
+    'width': 2000,  # 400
+}
+
+DANMAKU_MIN_SIZE = {
+    'height': 150,
+    'width': 400,
 }
 
 # logging

@@ -63,7 +63,8 @@ class ExamChannel(Channel):
 if __name__ == '__main__':
     import time
 
-    c = ExamChannel('demo', 'uuid', '', '')
+    #c = ExamChannel('demo', 'uuid', '', '')
+    #c = ExamChannel('cIemo', 'uuid', '000000', sub_passwd='000000')
     s = c.post_danmaku({'color': 'green', 'position': 'fly', 'content': '超长弹幕超长弹幕超长弹幕超长弹幕超长弹幕超长弹幕超长弹幕'})
     print(s)
     while True:
