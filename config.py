@@ -1,4 +1,4 @@
-# -- encoding: utf8 --
+# -- encoding: utf-8 --
 # author: TYM
 # date: 2015-3-12
 from urllib.parse import urljoin
