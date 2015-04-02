@@ -35,7 +35,7 @@ class DanmakuLine(QWidget):
         self.no_button.setMaximumSize(config.EXAM_BUTTON_MAX_SIZE['width'],
                                       config.EXAM_BUTTON_MAX_SIZE['height'])
         self.label.setWordWrap(True)
-        self.label.setAlignment(QtCore.Qt.AlignLeft)# | QtCore.Qt.AlignTop)
+        self.label.setAlignment(QtCore.Qt.AlignLeft | QtCore.Qt.AlignVCenter)
         self.setMaximumSize(config.DANMAKU_MAX_SIZE['width'],
                             config.DANMAKU_MAX_SIZE['height'])
         self.setMinimumSize(config.DANMAKU_MIN_SIZE['width'],
@@ -157,7 +157,7 @@ class DanmakuExamWidget(QWidget):
 
         self.danmaku_widget = DanmakuWidget()
         self.danmaku_scroll_area = QScrollArea(self)
-        #self.danmaku_scroll_area.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOn)
+        self.danmaku_scroll_area.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOn)
         self.danmaku_scroll_area.setWidget(self.danmaku_widget)
         self.layout().addWidget(self.danmaku_scroll_area)
 
@@ -172,6 +172,8 @@ class DanmakuExamWidget(QWidget):
             while not self._closed:
                 if self.top_widget.start_button.isHidden():
                     danmakus = self._channel.get_danmaku()
+                    danmakus = list(filter(
+                            lambda danmaku: danmaku['text'].strip(), danmakus))
                     if danmakus:
                         self._lock.acquire()
                         self._danmakus = \
