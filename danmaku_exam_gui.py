@@ -34,8 +34,9 @@ class ExamWidget(QWidget):
         self.pub_passwd_widget.line_edit.setEchoMode(QLineEdit.Password)
         self.exam_passwd_widget = InputWidget(label='审核密码', line_edit='')
         self.exam_passwd_widget.line_edit.setEchoMode(QLineEdit.Password)
-        self.uuid_widget = InputWidget(label='uuid',
-                line_edit=sid.shorten(uuid.uuid1().bytes))
+        #self.uuid_widget = InputWidget(label='uuid',
+        #        line_edit=sid.shorten(uuid.uuid1().bytes))
+        self.uuid_widget = InputWidget(label='uuid', line_edit='')
         self.uuid_widget.button = QPushButton('生成')
         self.uuid_widget.layout().addWidget(self.uuid_widget.button)
         self.connect_button = QPushButton('走你')
@@ -53,6 +54,8 @@ class ExamWidget(QWidget):
         self.layout().addWidget(self.connect_button)
         #self.layout().addWidget(self.danmaku_widget)
 
+        self.uuid_widget.hide()
+
         self.setWindowTitle('弹幕审核')
 
     @QtCore.pyqtSlot()
@@ -60,7 +63,9 @@ class ExamWidget(QWidget):
         channel_name = self.channel_widget.line_edit.text().strip()
         pub_passwd = self.pub_passwd_widget.line_edit.text().strip()
         exam_passwd = self.exam_passwd_widget.line_edit.text().strip()
-        uid = self.uuid_widget.line_edit.text().strip()
+        #uid = self.uuid_widget.line_edit.text().strip()
+        uid = '{channel}+{exampwd}+exam'.format(channel=channel_name, exampwd=exam_passwd)
+        #self.uuid_widget.line_edit.setText(uid)
 
         self.main_window = DanmakuExamWidget()
         self.main_window.channel_widget = self
