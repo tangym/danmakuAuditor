@@ -229,8 +229,9 @@ class DanmakuExamWidget(QWidget):
                 return
         else:
             pass
-        self.channel_widget.setGeometry(self.x(), self.y(),
-                self.channel_widget.width(), self.channel_widget.height())
+        self.channel_widget.move(
+            self.x() + (self.width() - self.channel_widget.width()) / 2,
+            self.y() + (self.height() - self.channel_widget.height()) / 2)
         self.channel_widget.show()
 
     def resizeEvent(self, event):

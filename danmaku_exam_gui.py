@@ -57,6 +57,10 @@ class ExamWidget(QWidget):
         self.uuid_widget.hide()
 
         self.setWindowTitle('弹幕审核')
+        screen = QDesktopWidget().screenGeometry()
+        self.move((screen.width() - self.width()) / 2,
+                  (screen.height() - self.height()) / 2)
+
 
     @QtCore.pyqtSlot()
     def connect_channel(self):
@@ -69,8 +73,9 @@ class ExamWidget(QWidget):
 
         self.main_window = DanmakuExamWidget()
         self.main_window.channel_widget = self
-        self.main_window.setGeometry(self.x(), self.y(),
-                self.main_window.width(), self.main_window.height())
+        self.main_window.move(
+                self.x() + (self.width() - self.main_window.width()) / 2,
+                self.y() + (self.height() - self.main_window.height()) / 2)
         self.main_window.show()
         self.hide()
         self.main_window._channel = ExamChannel(channel_name, uid, exam_passwd,
