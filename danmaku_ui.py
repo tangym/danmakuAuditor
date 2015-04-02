@@ -79,11 +79,11 @@ class DanmakuWidget(QWidget):
     def __init__(self):
         QWidget.__init__(self)
         self.setLayout(QBoxLayout(QBoxLayout.TopToBottom))
-        self.add_danmaku({
-                                    'content': "aaaaaaaaaaaaaaaa",
-                                    'position': "fly",
-                                    'color': "black",
-                                })
+        #self.add_danmaku({
+        #                            'content': "aaaaaaaaaaaaaaaa",
+        #                            'position': "fly",
+        #                            'color': "black",
+        #                        })
 
     def add_danmaku(self, danmaku):
         danmaku_line = DanmakuLine(danmaku)
