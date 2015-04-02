@@ -58,8 +58,11 @@ class ExamWidget(QWidget):
 
         self.setWindowTitle('弹幕审核')
         screen = QDesktopWidget().screenGeometry()
-        self.move((screen.width() - self.width()) / 2,
-                  (screen.height() - self.height()) / 2)
+        #self.move((screen.width() - self.width()) / 2,
+        #          (screen.height() - self.height()) / 2)
+        # I don't know why the widget size is doubled.
+        self.move((screen.width() - self.width() / 2) / 2,
+                  (screen.height() - self.height() / 2) / 2)
 
 
     @QtCore.pyqtSlot()

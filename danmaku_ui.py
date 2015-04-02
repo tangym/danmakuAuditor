@@ -143,7 +143,7 @@ class DanmakuExamWidget(QWidget):
     channel_widget = None
     _danmakus = []
     _lock = Lock()
-    _danmaku_got = QtCore.pyqtSignal()
+    _danmaku_got = QtCore.pyqtSignal(int)
     _danmaku_eject = QtCore.pyqtSignal(int, name='_danmaku_eject')
     _danmaku_delete = QtCore.pyqtSignal(int, name='_danmaku_delete')
 
@@ -162,8 +162,10 @@ class DanmakuExamWidget(QWidget):
         self.layout().addWidget(self.danmaku_scroll_area)
 
         self.resize(500, 500)
+        self.danmaku_scroll_area.setFocus()
 
         self._danmaku_got.connect(self.add_danmaku)
+        self._danmaku_got.connect(self.resizeEvent)
         self._danmaku_eject.connect(self.eject_danmaku)
         self._danmaku_delete.connect(self.delete_danmaku)
 
@@ -183,7 +185,7 @@ class DanmakuExamWidget(QWidget):
                                     'color': danmaku['style']
                                 } for danmaku in danmakus]
                         self._lock.release()
-                        self._danmaku_got.emit()
+                        self._danmaku_got.emit(0)
 
     @QtCore.pyqtSlot()
     def add_danmaku(self):
@@ -242,7 +244,7 @@ class DanmakuExamWidget(QWidget):
                 else self.danmaku_widget.height())
 
     def keyPressEvent(self, event):
-        if event.key() == config.HOTKEY['yes']:
+        if event.key() in config.HOTKEY['yes']:
             self._danmaku_eject.emit(0)
-        elif event.key() == config.HOTKEY['no']:
+        elif event.key() in config.HOTKEY['no']:
             self._danmaku_delete.emit(0)

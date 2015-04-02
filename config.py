@@ -16,8 +16,8 @@ URL = {
 }
 
 HOTKEY = {
-    'yes' : QtCore.Qt.Key_Return,
-    'no' : QtCore.Qt.Key_Escape # QtCore.Qt.Key_Space # QtCore.Qt.Key_Escape,
+    'yes' : [QtCore.Qt.Key_Return, ] ,
+    'no' : [QtCore.Qt.Key_Escape, QtCore.Qt.Key_Space],
 }
 
 EXAM_BUTTON_MAX_SIZE = {
@@ -31,7 +31,7 @@ DANMAKU_MAX_SIZE = {
 }
 
 DANMAKU_MIN_SIZE = {
-    'height': 150,
+    'height': 30, #150,
     'width': 400,
 }
 
